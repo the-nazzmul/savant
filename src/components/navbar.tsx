@@ -14,7 +14,7 @@ const Navbar = async () => {
         <div className="flex items-center gap-4">
           {isSignedIn ? (
             <div className="flex items-center gap-4">
-              <Link href="/dashboard">
+              <Link href="/dashboard" className="hidden sm:block">
                 <RainbowButton>Go to Chats</RainbowButton>
               </Link>
               <UserButton

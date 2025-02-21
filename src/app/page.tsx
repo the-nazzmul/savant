@@ -1,3 +1,4 @@
+import FileUpload from "@/components/file-upload";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { auth } from "@clerk/nextjs/server";
@@ -28,7 +29,7 @@ export default async function Home() {
         </p>
         <div className="w-full mt-4 flex justify-center">
           {isSignedIn ? (
-            <h1>fileupload</h1>
+            <FileUpload />
           ) : (
             <Link href="/sign-in">
               <RainbowButton>
