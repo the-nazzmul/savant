@@ -17,7 +17,9 @@ export default async function Home() {
       <div className="flex flex-col mt-2">
         {isSignedIn && (
           <div className="flex justify-center my-2">
-            <RainbowButton>Go to chats</RainbowButton>
+            <Link href="/">
+              <RainbowButton>Go to Chats</RainbowButton>
+            </Link>
           </div>
         )}
         <p className="text-center text-neutral-400 mt-2 px-8 max-w-xl">
