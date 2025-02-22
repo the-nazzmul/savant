@@ -18,7 +18,7 @@ const Navbar = async () => {
                 <RainbowButton>Go to Chats</RainbowButton>
               </Link>
               <UserButton
-                appearance={{ elements: { userButtonAvatarBox: "w-12 h-12" } }}
+                appearance={{ elements: { userButtonAvatarBox: "w-11 h-11" } }}
               />
             </div>
           ) : (
