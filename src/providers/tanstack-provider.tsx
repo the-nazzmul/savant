@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 const TanstackProvider = ({ children }: Props) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}/</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 
