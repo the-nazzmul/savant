@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Message } from "ai";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   messages: Message[];
@@ -20,13 +21,17 @@ const MessageList = ({ messages }: Props) => {
           >
             <div
               className={cn(
-                "rounded-lg px-3 text-sm py-1 shadow-md ring-1 ring-gray-900/10",
+                "rounded-lg px-3 text-sm py-1 shadow-md ring-1 ring-gray-900/10 max-w-sm overflow-scroll",
                 {
                   "bg-primary text-white": message.role === "user",
                 }
               )}
             >
-              <p>{message.content}</p>
+              {message.role === "assistant" ? (
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              ) : (
+                <p>{message.content}</p>
+              )}
             </div>
           </div>
         );

@@ -1,13 +1,12 @@
-import { Pinecone, PineconeRecord } from "@pinecone-database/pinecone";
-import { downloadFromS3 } from "./s3-server";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import {
   Document,
   RecursiveCharacterTextSplitter,
 } from "@pinecone-database/doc-splitter";
-import { getEmbeddings } from "./embedding";
+import { Pinecone, PineconeRecord } from "@pinecone-database/pinecone";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import md5 from "md5";
-import { metadata } from "@/app/layout";
+import { getEmbeddings } from "./embedding";
+import { downloadFromS3 } from "./s3-server";
 import { convertToAscii } from "./utils";
 
 type PDFPage = {
@@ -42,6 +41,7 @@ export async function loadPdfIntoPinecone(fileKey: string) {
   for (const doc of flatDocuments) {
     console.log(`embedding ${doc.metadata.pageNumber}`);
     const vector = await embedChunks(doc);
+    console.log("The VECTOR:", vector);
     vectors.push(vector);
   }
   // upload to pinecone
@@ -53,7 +53,7 @@ export async function loadPdfIntoPinecone(fileKey: string) {
   console.log("intgrating with pinecone");
   const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
 
-  await pineconeIndex.upsert(vectors);
+  await namespace.upsert(vectors);
 
   return documents[0];
 }
