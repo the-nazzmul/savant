@@ -1,6 +1,6 @@
 import { getContext } from "@/lib/context";
 import { db } from "@/lib/db";
-import { chats } from "@/lib/db/schema";
+import { chats, messages as _messages } from "@/lib/db/schema";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { streamText, Message } from "ai";
 import { eq } from "drizzle-orm";
@@ -42,11 +42,39 @@ export async function POST(req: Request) {
     Please format your responses using Markdown. Use bullet points where appropriate. and if there is a code snippet, please use triple backticks to format it.
     `,
   };
-  const stream = streamText({
-    model,
-    messages: [prompt, ...messages.filter((m: Message) => m.role === "user")],
-    temperature: 0.7,
-  });
+
+  let geminiResponseChunk = "";
+  let stream;
+
+  try {
+    stream = streamText({
+      model,
+      messages: [prompt, ...messages.filter((m: Message) => m.role === "user")],
+      temperature: 0.7,
+      onChunk: (chunk) => {
+        if ("textDelta" in chunk.chunk) {
+          geminiResponseChunk += chunk.chunk.textDelta;
+        }
+      },
+      onFinish: async () => {
+        await db.insert(_messages).values({
+          chatId,
+          content: geminiResponseChunk,
+          role: "system",
+        });
+      },
+    });
+    await db.insert(_messages).values({
+      chatId,
+      content: userQuery.content,
+      role: "user",
+    });
+  } catch (error) {
+    console.error("Error initiating stream or saving user message:", error);
+    return NextResponse.json({ error: "Failed to process chat request" });
+  }
+
+  console.log("STREAM DATA", stream);
 
   return stream?.toDataStreamResponse();
 }
