@@ -24,6 +24,8 @@ const MessageList = ({ messages }: Props) => {
                 "rounded-lg px-3 text-sm py-1 shadow-md ring-1 ring-gray-900/10 max-w-sm overflow-scroll",
                 {
                   "bg-primary text-white": message.role === "user",
+                  "bg-white text-black":
+                    message.role === "system" || message.role === "assistant",
                 }
               )}
             >

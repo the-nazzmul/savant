@@ -4,17 +4,31 @@ import { SendIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useChat } from "@ai-sdk/react";
+import { Message } from "ai";
 import MessageList from "./message-list";
 import { useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 type Props = { chatId: number };
 
 const ChatComponent = ({ chatId }: Props) => {
+  const { data } = useQuery({
+    queryKey: ["chat", chatId],
+    queryFn: async () => {
+      const response = await axios.post<Message[]>("/api/get-messages", {
+        chatId,
+      });
+      return response.data;
+    },
+  });
+
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "/api/chat",
     body: {
       chatId,
     },
+    initialMessages: data || [],
   });
   const messageContainerRef = useRef<HTMLDivElement>(null);
 
@@ -29,9 +43,12 @@ const ChatComponent = ({ chatId }: Props) => {
   }, [messages]);
 
   return (
-    <div className="relative h-screen flex flex-col" id="message-container">
-      <div className="sticky top-0 inset-x-0 p-2 h-fit bg-white pt-4">
-        <h3 className="text-xl font-bold">Chat</h3>
+    <div
+      className="relative h-screen flex flex-col bg-neutral-200"
+      id="message-container"
+    >
+      <div className="sticky top-0 inset-x-0 p-2 h-fit bg-neutral-200  border-b border-zinc-950">
+        <h3 className="text-xl font-bold text-center">Chat</h3>
       </div>
       {/* message list */}
       <div
@@ -43,13 +60,13 @@ const ChatComponent = ({ chatId }: Props) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="sticky bottom-0 inset-x-0 p-2  bg-white"
+        className="sticky bottom-0 inset-x-0 p-2  bg-neutral-400"
       >
         <div className="flex gap-1 items-center">
           <Input
             value={input}
             onChange={handleInputChange}
-            className="w-full"
+            className="w-full bg-neutral-50"
             placeholder="Ask any question..."
           />
           <Button size="sm">
