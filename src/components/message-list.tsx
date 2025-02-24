@@ -29,7 +29,7 @@ const MessageList = ({ messages }: Props) => {
                 }
               )}
             >
-              {message.role === "assistant" ? (
+              {message.role === "assistant" || message.role === "system" ? (
                 <ReactMarkdown>{message.content}</ReactMarkdown>
               ) : (
                 <p>{message.content}</p>

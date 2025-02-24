@@ -47,7 +47,7 @@ const ChatComponent = ({ chatId }: Props) => {
       className="relative h-screen flex flex-col bg-neutral-200"
       id="message-container"
     >
-      <div className="sticky top-0 inset-x-0 p-2 h-fit bg-neutral-200  border-b border-zinc-950">
+      <div className="sticky top-0 inset-x-0 p-2 h-fit bg-neutral-200  shadow-md">
         <h3 className="text-xl font-bold text-center">Chat</h3>
       </div>
       {/* message list */}
@@ -66,7 +66,7 @@ const ChatComponent = ({ chatId }: Props) => {
           <Input
             value={input}
             onChange={handleInputChange}
-            className="w-full bg-neutral-50"
+            className="w-full bg-white"
             placeholder="Ask any question..."
           />
           <Button size="sm">
