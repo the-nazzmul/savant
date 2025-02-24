@@ -5,7 +5,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-const returnUrl = process.env.NEXT_PUBLIC_APP_URL + "/account";
+const returnUrl = process.env.NEXT_PUBLIC_URL + "/account";
 
 export async function GET() {
   try {

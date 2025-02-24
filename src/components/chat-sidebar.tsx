@@ -1,11 +1,13 @@
 "use client";
 
 import { DrizzleChat } from "@/lib/db/schema";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import { MessageCircleIcon, PlusCircleIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import axios from "axios";
+import { MessageCircleIcon, PlusCircleIcon } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 import { SignOutButton } from "./sign-out-button";
+import { Button } from "./ui/button";
 
 type Props = {
   chats: DrizzleChat[];
@@ -13,6 +15,20 @@ type Props = {
 };
 
 const ChatSidebar = ({ chats, chatId }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubscription = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get("/api/stripe");
+      window.location.href = response.data.url;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="w-full h-screen p-4 text-gray-200 bg-gray-900 flex flex-col justify-between">
       <div>
@@ -45,9 +61,13 @@ const ChatSidebar = ({ chats, chatId }: Props) => {
       </div>
       <div className="bottom-4 left-4">
         <SignOutButton fullWidth />
-        <div className="flex items-center gap-2 text-sm text-slate-500 flex-wrap w-full">
-          {/* stripe button here */}
-        </div>
+        <Button
+          className="mt-2 w-full"
+          disabled={isLoading}
+          onClick={handleSubscription}
+        >
+          Upgrade to pro
+        </Button>
       </div>
     </div>
   );
