@@ -19,11 +19,7 @@ const SubscriptionButton = ({ isPro }: { isPro: boolean }) => {
   };
 
   return (
-    <Button
-      disabled={isLoading}
-      onClick={handleSubscription}
-      variant="secondary"
-    >
+    <Button disabled={isLoading} onClick={handleSubscription} variant="outline">
       {isPro ? "Manage Subscription" : "Get Pro"}
     </Button>
   );
