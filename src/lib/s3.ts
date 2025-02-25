@@ -21,15 +21,15 @@ export async function uploadToS3(file: File) {
     const upload = s3
       .putObject(params)
       .on("httpUploadProgress", (evt) => {
-        console.log(
-          "uploading to bucket",
-          parseInt(((evt.loaded * 100) / evt.total).toString()) + "%"
-        );
+        // console.log(
+        //   "uploading to bucket",
+        //   parseInt(((evt.loaded * 100) / evt.total).toString()) + "%"
+        // );
       })
       .promise();
 
     await upload.then((data) => {
-      console.log("successfully uploaded to s3", file_key);
+      // console.log("successfully uploaded to s3", file_key);
     });
 
     return Promise.resolve({
