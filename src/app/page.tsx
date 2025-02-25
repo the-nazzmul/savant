@@ -1,8 +1,10 @@
 import FileUpload from "@/components/file-upload";
 import { SignOutButton } from "@/components/sign-out-button";
+import SubscriptionButton from "@/components/subscription-btn";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { chats } from "@/lib/db/schema";
+import { checkSubscription } from "@/lib/subcription";
 import { auth } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 import { LogInIcon } from "lucide-react";
@@ -13,6 +15,7 @@ import { toast } from "sonner";
 export default async function Home() {
   const { userId } = await auth();
   const isSignedIn = !!userId;
+  const isPro = await checkSubscription();
   const lastChat = userId
     ? await db
         .select()
@@ -31,20 +34,30 @@ export default async function Home() {
       </div>
       <div className="flex flex-col mt-2">
         {isSignedIn && (
-          <div className="flex justify-center gap-4 my-2">
-            <Link href={lastChat ? `/chat/${lastChat?.[0]?.id}` : "/"}>
-              <Button>Go to Chats</Button>
-            </Link>
-            <SignOutButton />
+          <div className=" flex items-center justify-center gap-2">
+            {lastChat && (
+              <div className="flex justify-center gap-4 my-2">
+                <Link href={lastChat ? `/chat/${lastChat?.[0]?.id}` : "/"}>
+                  <Button>Go to Chats</Button>
+                </Link>
+              </div>
+            )}
+            <div className="ml-2">
+              <SubscriptionButton isPro={isPro} />
+            </div>
           </div>
         )}
         <p className="text-center text-neutral-100 mt-2 px-8 max-w-xl">
           Join millions of students, researchers and professionals to instantly
           answer questions and understand research with AI
         </p>
-        <div className="w-full mt-4 flex justify-center">
+        <div className="w-full mt-4 flex flex-col items-center">
           {isSignedIn ? (
-            <FileUpload />
+            <>
+              <FileUpload />
+              <div className="h-4" />
+              <SignOutButton />
+            </>
           ) : (
             <Link href="/sign-in">
               <Button>

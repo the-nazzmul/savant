@@ -8,13 +8,15 @@ import Link from "next/link";
 import { useState } from "react";
 import { SignOutButton } from "./sign-out-button";
 import { Button } from "./ui/button";
+import { checkSubscription } from "@/lib/subcription";
 
 type Props = {
   chats: DrizzleChat[];
   chatId: number;
+  isPro: boolean;
 };
 
-const ChatSidebar = ({ chats, chatId }: Props) => {
+const ChatSidebar = ({ chats, chatId, isPro }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubscription = async () => {
@@ -66,7 +68,7 @@ const ChatSidebar = ({ chats, chatId }: Props) => {
           disabled={isLoading}
           onClick={handleSubscription}
         >
-          Upgrade to pro
+          {isPro ? "Manage Subscription" : "Get Pro"}
         </Button>
       </div>
     </div>
