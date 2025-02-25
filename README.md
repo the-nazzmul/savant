@@ -1,6 +1,6 @@
 # Savant 🧠📄
 
-![Savant Banner](https://via.placeholder.com/1000x300?text=Savant+-+AI-powered+PDF+Research+Assistant)
+![Savant Banner](https://raw.githubusercontent.com/the-nazzmul/savant/refs/heads/main/public/logo.png?token=GHSAT0AAAAAAC5N3PUCRGGL4FRAGQ6GGVTMZ55O5XQ)
 
 **Savant** is an AI-powered PDF research assistant designed to help users extract meaningful insights from their PDFs. Built on **Google's Gemini AI**, Savant enables users to upload documents, chat with them, and even analyze resumes for **ATS compatibility**.
 
@@ -30,10 +30,10 @@
 
 ## 📸 Screenshots
 
-![Dashboard Screenshot](https://via.placeholder.com/800x450?text=Dashboard+Screenshot)  
-_Dashboard where users can upload and interact with their PDFs._
+![Landing page Screenshot](https://raw.githubusercontent.com/the-nazzmul/savant/refs/heads/main/public/screenshot-1.png?token=GHSAT0AAAAAAC5N3PUDBDD4V4QVWHVOO7L2Z55O6LQ)  
+_Landing page where after successful login, users can upload and interact with their PDFs._
 
-![Chat Screenshot](https://via.placeholder.com/800x450?text=Chat+with+PDF)  
+![Chat Screenshot](https://raw.githubusercontent.com/the-nazzmul/savant/refs/heads/main/public/screenshot-2.png?token=GHSAT0AAAAAAC5N3PUDAVVHXRIELXWS5KBYZ55O7DA)  
 _Example chat session with an uploaded PDF._
 
 ## 🏗️ Installation
