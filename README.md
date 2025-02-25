@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Savant 🧠📄
 
-## Getting Started
+![Savant Banner](https://via.placeholder.com/1000x300?text=Savant+-+AI-powered+PDF+Research+Assistant)
 
-First, run the development server:
+**Savant** is an AI-powered PDF research assistant designed to help users extract meaningful insights from their PDFs. Built on **Google's Gemini AI**, Savant enables users to upload documents, chat with them, and even analyze resumes for **ATS compatibility**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+🔍 **No more scanning through pages manually!** With Savant, you get precise, AI-powered answers directly from your documents.
+
+## 🚀 Features
+
+✅ **AI-Powered PDF Chat** – Upload a PDF and chat with it anytime to extract key information.  
+✅ **Smart Resume Analysis** – Check if a resume is **ATS-friendly** for job applications.  
+✅ **Vectorized Search** – Uses Google's `text-embedding-004` model for accurate context-based responses.  
+✅ **Cloud Storage** – Securely uploads PDFs to **AWS S3** for easy access.  
+✅ **Powerful AI Retrieval** – Queries are vectorized, matched in **Pinecone DB**, and processed by **Gemini AI** for highly accurate answers.  
+✅ **User Authentication** – Powered by **Clerk**, ensuring a secure and seamless login experience.  
+✅ **Subscription System** – Monthly **Stripe** payments for continued access.
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js, React, TypeScript, TailwindCSS, Shadcn UI
+- **Backend:** Google Gemini AI, Pinecone DB, NeonDB, LangChain, Drizzle ORM
+- **Authentication:** Clerk
+- **Cloud Storage:** AWS S3
+- **Payments:** Stripe
+
+## 🌐 Live Demo
+
+[🔗 Visit Savant](https://savant-nazz.vercel.app/)
+
+## 📸 Screenshots
+
+![Dashboard Screenshot](https://via.placeholder.com/800x450?text=Dashboard+Screenshot)  
+_Dashboard where users can upload and interact with their PDFs._
+
+![Chat Screenshot](https://via.placeholder.com/800x450?text=Chat+with+PDF)  
+_Example chat session with an uploaded PDF._
+
+## 🏗️ Installation
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- NPM or Yarn
+- An `.env` file with the required API keys (see below)
+
+### 1️⃣ Clone the Repository
+
+```sh
+git clone https://github.com/yourusername/savant.git
+cd savant
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 3️⃣ Set Up Environment Variables
 
-## Learn More
+Create a `.env.local` file in the root directory and add:
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Database
+DATABASE_URL=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# AWS S3
+NEXT_PUBLIC_AWS_ACCESS_KEY_ID=
+NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY=
+NEXT_PUBLIC_S3_BUCKET_NAME=
 
-## Deploy on Vercel
+# Pinecone
+PINECONE_API_KEY=
+PINECONE_INDEX_NAME=
+PINE_HOST_URL=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Gemini AI
+GOOGLE_API_KEY=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Stripe
+STRIPE_API_KEY=
+STRIPE_PUBLISHABLE_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+NEXT_PUBLIC_URL=
+```
+
+### 4️⃣ Start the Development Server
+
+```sh
+npm run dev
+```
+
+This will start the app on `http://localhost:3000`.
+
+## 🛠️ How It Works
+
+1️⃣ **Upload a PDF** → Your document is securely stored in **AWS S3**.  
+2️⃣ **Chunking & Vectorization** → The PDF is split into **smaller chunks** and embedded using **Google's text-embedding-004 model**.  
+3️⃣ **Indexing in Pinecone** → The vectorized data is stored in **Pinecone DB** for efficient retrieval.  
+4️⃣ **Query Processing** → When a user asks a question, the query is also vectorized and matched against stored data.  
+5️⃣ **Gemini AI Response** → The most relevant data is sent to **Gemini AI**, ensuring **accurate, context-aware answers**.
+
+## 🤝 Contributing
+
+We welcome contributions! If you’d like to improve **Savant**, feel free to:
+
+1. Fork the repository
+2. Create a new branch
+3. Submit a Pull Request
+
+## 📜 License
+
+This project is **open-source** under the **MIT License**.
+
+---
+
+💡 **Savant – The Future of AI-Driven Document Research!** 🚀

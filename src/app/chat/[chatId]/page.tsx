@@ -38,7 +38,7 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
         <div className="max-h-screen p-4 overflow-scroll flex-[5]">
           <PDFViewer
             pdfUrl={
-              _chats.find((chat) => chat.id === parseInt(chatId))?.pdfUrl || ""
+              _chats.find((chat) => chat.id === parseInt(chatId))?.pdfUrl!
             }
           />
         </div>

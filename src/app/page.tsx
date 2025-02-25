@@ -16,14 +16,19 @@ export default async function Home() {
   const { userId } = await auth();
   const isSignedIn = !!userId;
   const isPro = await checkSubscription();
-  const lastChat = userId
-    ? await db
-        .select()
-        .from(chats)
-        .where(eq(chats.userId, userId))
-        .orderBy(desc(chats.createdAt))
-        .limit(1)
-    : null;
+  let lastChat;
+  if (userId) {
+    lastChat = await db
+      .select()
+      .from(chats)
+      .where(eq(chats.userId, userId))
+      .orderBy(desc(chats.createdAt))
+      .limit(1);
+    if (lastChat) {
+      lastChat = lastChat[0];
+    }
+  }
+
   return (
     <div className="min-h-screen w-screen bg-gradient-to-r from-neutral-600 via-neutral-400 to-neutral-600 relative flex flex-col items-center justify-center antialiased">
       <div className="max-w-2xl mx-auto p-4 flex flex-col items-center gap-8">
@@ -37,7 +42,7 @@ export default async function Home() {
           <div className=" flex items-center justify-center gap-2">
             {lastChat && (
               <div className="flex justify-center gap-4 my-2">
-                <Link href={lastChat ? `/chat/${lastChat?.[0]?.id}` : "/"}>
+                <Link href={lastChat ? `/chat/${lastChat.id}` : "/"}>
                   <Button>Go to Chats</Button>
                 </Link>
               </div>
