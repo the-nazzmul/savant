@@ -26,7 +26,7 @@
 
 ## 🌐 Live Demo
 
-[🔗 Visit Savant](https://savant-nazz.vercel.app/)
+[🔗 Visit Savant](https://savant-nazz.vercel.app)
 
 ## 📸 Screenshots
 
