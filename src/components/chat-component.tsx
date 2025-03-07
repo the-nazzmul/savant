@@ -51,10 +51,7 @@ const ChatComponent = ({ chatId }: Props) => {
         <h3 className="text-xl font-bold text-center">Chat</h3>
       </div>
       {/* message list */}
-      <div
-        ref={messageContainerRef}
-        className="overflow-y-scroll flex-grow py-2"
-      >
+      <div ref={messageContainerRef} className="overflow-y-auto flex-grow py-2">
         {/* message list */}
         <MessageList messages={messages} />
       </div>

@@ -21,7 +21,7 @@ const MessageList = ({ messages }: Props) => {
           >
             <div
               className={cn(
-                "rounded-lg px-3 text-sm py-1 shadow-md ring-1 ring-gray-900/10 max-w-sm overflow-scroll",
+                "rounded-lg px-3 text-sm py-1 shadow-md ring-1 ring-gray-900/10 max-w-sm overflow-auto",
                 {
                   "bg-primary text-white": message.role === "user",
                   "bg-white text-black":

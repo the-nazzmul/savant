@@ -28,8 +28,8 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
     return redirect("/");
   }
   return (
-    <div className="flex max-h-screen overflow-scroll">
-      <div className="flex w-full max-h-screen overflow-scroll">
+    <div className="flex max-h-screen">
+      <div className="flex w-full max-h-screen">
         {/* chat sidebar */}
         <div className="flex-[1] max-w-xs">
           <ChatSidebar chats={_chats} chatId={parseInt(chatId)} isPro={isPro} />
