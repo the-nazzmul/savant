@@ -9,6 +9,7 @@ import MessageList from "./message-list";
 import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Textarea } from "./ui/textarea";
 
 type Props = { chatId: number };
 
@@ -60,7 +61,7 @@ const ChatComponent = ({ chatId }: Props) => {
         className="sticky bottom-0 inset-x-0 p-2  bg-neutral-400"
       >
         <div className="flex gap-1 items-center">
-          <Input
+          <Textarea
             value={input}
             onChange={handleInputChange}
             className="w-full bg-white"
